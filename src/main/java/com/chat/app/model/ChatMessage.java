@@ -21,10 +21,6 @@ public class ChatMessage {
 
     private String senderColor; // For user avatar colors
 
-    public ChatMessage() {
-
-    }
-
     public enum MessageType {
         CHAT, JOIN, LEAVE, TYPING, USER_COUNT
     }
