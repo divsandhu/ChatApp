@@ -25,15 +25,6 @@ public class ChatMessage {
         CHAT, JOIN, LEAVE, TYPING, USER_COUNT
     }
 
-    public ChatMessage(Long id, String sender, String content, MessageType type, LocalDateTime timestamp, String senderColor) {
-        this.id = id;
-        this.sender = sender;
-        this.content = content;
-        this.type = type;
-        this.timestamp = timestamp;
-        this.senderColor = senderColor;
-    }
-
     public Long getId() {
         return id;
     }
