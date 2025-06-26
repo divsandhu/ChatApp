@@ -11,7 +11,8 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 import java.util.Random;
 
 @Controller
@@ -31,7 +32,7 @@ public class ChatController {
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
     public ChatMessage sendMessage(@Payload ChatMessage message) {
-        message.setTimestamp(LocalDateTime.now());
+        message.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")));
         message.setType(ChatMessage.MessageType.CHAT);
 
         // Assign a color if not already set
@@ -52,7 +53,7 @@ public class ChatController {
         // Add user to active users
         userService.addUser(sessionId, message.getSender());
 
-        message.setTimestamp(LocalDateTime.now());
+        message.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")));
         message.setType(ChatMessage.MessageType.JOIN);
         message.setContent(message.getSender() + " joined the chat!");
         message.setSenderColor(getRandomColor());
@@ -67,7 +68,7 @@ public class ChatController {
     @SendTo("/topic/typing")
     public ChatMessage userTyping(@Payload ChatMessage message) {
         message.setType(ChatMessage.MessageType.TYPING);
-        message.setTimestamp(LocalDateTime.now());
+        message.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")));
         return message;
     }
 
@@ -91,7 +92,7 @@ public class ChatController {
         ChatMessage userCountMessage = new ChatMessage();
         userCountMessage.setType(ChatMessage.MessageType.USER_COUNT);
         userCountMessage.setContent(String.valueOf(userCount));
-        userCountMessage.setTimestamp(LocalDateTime.now());
+        userCountMessage.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")));
 
         messagingTemplate.convertAndSend("/topic/userCount", userCountMessage);
     }

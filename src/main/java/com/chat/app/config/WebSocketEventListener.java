@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 
 @Component
 public class WebSocketEventListener {
@@ -41,7 +42,7 @@ public class WebSocketEventListener {
             leaveMessage.setSender(username);
             leaveMessage.setContent(username + " left the chat");
             leaveMessage.setType(ChatMessage.MessageType.LEAVE);
-            leaveMessage.setTimestamp(LocalDateTime.now());
+            leaveMessage.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")));
 
             messagingTemplate.convertAndSend("/topic/messages", leaveMessage);
             broadcastUserCount();
@@ -53,7 +54,7 @@ public class WebSocketEventListener {
         ChatMessage userCountMessage = new ChatMessage();
         userCountMessage.setType(ChatMessage.MessageType.USER_COUNT);
         userCountMessage.setContent(String.valueOf(userCount));
-        userCountMessage.setTimestamp(LocalDateTime.now());
+        userCountMessage.setTimestamp(ZonedDateTime.now(ZoneId.of("Asia/Kolkata")));
 
         messagingTemplate.convertAndSend("/topic/userCount", userCountMessage);
     }
