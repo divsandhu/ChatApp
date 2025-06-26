@@ -17,7 +17,7 @@ public class ChatMessage {
     private String content;
     private MessageType type;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss z")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
     private ZonedDateTime timestamp;
 
     private String senderColor; // For user avatar colors
