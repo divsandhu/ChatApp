@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +17,8 @@ public class ChatMessage {
     private String content;
     private MessageType type;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime timestamp;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss z")
+    private ZonedDateTime timestamp;
 
     private String senderColor; // For user avatar colors
 
@@ -57,11 +58,11 @@ public class ChatMessage {
         this.type = type;
     }
 
-    public LocalDateTime getTimestamp() {
+    public ZonedDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(ZonedDateTime timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -78,6 +79,6 @@ public class ChatMessage {
         this.sender = sender;
         this.content = content;
         this.type = type;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = ZonedDateTime.now(ZoneId.of("Asia/Kolkata"));
     }
 }
