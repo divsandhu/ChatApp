@@ -76,6 +76,11 @@ public class ChatController {
         return "chat";
     }
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/chat";
+    }
+
     private String getRandomColor() {
         Random random = new Random();
         return COLORS[random.nextInt(COLORS.length)];
